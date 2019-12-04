@@ -1,0 +1,52 @@
+{% extends "base/base_template.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container tables">
+  <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Lorry</th>
+      <th class="th-sm">Driver</th>
+      <th class="th-sm">From</th>
+      <th class="th-sm">To</th>
+      <th class="th-sm">Total KM</th>
+      <th class="th-sm">Amount</th>
+      <th class="th-sm">Diesel Cost</th>
+      <th class="th-sm">Toll Cost</th>
+      <th class="th-sm">Police Cost</th>
+      <th class="th-sm">Other Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in lorry_history %}
+    <tr>
+      <td>{{row.lorryid}}</td>
+      <td>{{row.driverid}}</td>
+      <td>{{row.from_place}}</td>
+      <td>{{row.to_place}}</td>
+      <td>{{row.endkm}}</td>
+      <td>{{row.amount}}</td>
+      <td>{{row.dieselcost}}</td>
+      <td>{{row.tollcost}}</td>
+      <td>{{row.policecost}}</td>
+      <td>{{row.othercost}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Lorry</th>
+      <th>Driver</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Total KM</th>
+      <th>Amount</th>
+      <th>Diesel Cost</th>
+      <th>Toll Cost</th>
+      <th>Police Cost</th>
+      <th>Other Cost</th>
+    </tr>
+  </tfoot>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base/base_template.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container tables text-center">
+<h2>Available Lorrys</h2>
+<table class="table table-striped">
+  <thead>
+    <td>ID</td>
+    <td>LORRY NUMBER</td>
+    <td>FROM</td>
+    <td>TO</td>
+    <td>DATE</td>
+    <td>TIME</td>
+    <td>PRICE</td>
+  </thead>
+
+  {% for row in available_lorry %}
+  <tr>
+        <td>{{row.id }}</td>
+        <td>{{row.lorryid}}</td>
+        <td>{{row.from_place}}</td>
+        <td>{{row.to_place}}</td>
+        <td>{{row.startdate}}</td>
+        <td>{{row.starttime}}</td>
+        <td>{{row.estimated_amount}}</td>
+
+        <td>
+          <form action="{% url 'create_user_booking' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="_id" value={{row.id }} hidden=False>
+            <input type="submit" name="" value="BOOK">
+          </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

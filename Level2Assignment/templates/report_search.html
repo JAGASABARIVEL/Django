@@ -1,0 +1,25 @@
+{% extends "base/base_template.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container">
+        <form method="post" class="margin">
+          {% csrf_token %}
+          <div class="row">
+              <div class="col-3"></div>
+              <div class="col">
+                {{form.lorryid | as_crispy_field}}
+                {{form.from_date | as_crispy_field}}
+                {{form.fromtime | as_crispy_field}}
+                {{form.todate | as_crispy_field}}
+                {{form.totime | as_crispy_field}}
+                <input type="submit" name="_submit" value="Search">
+              </div>
+              <div class="col-3"></div>
+          </div>
+      </form>
+    </div>
+
+{% endblock %}

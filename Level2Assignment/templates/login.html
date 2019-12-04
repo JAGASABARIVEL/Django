@@ -1,0 +1,41 @@
+{% extends "base/base_template.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container margin text-center">
+      <div class="row">
+      <div class="col-3"></div>
+      <div class="col">
+        <form action="{% url 'user_login' %}" method="post">
+          {% csrf_token %}
+          <p class="h4 mb-4">LogIn</p>
+          <!-- Username -->
+          <input type="username" id="defaultLoginFormEmail" name=_username class="form-control mb-4" placeholder="Username">
+          <!-- Password -->
+          <input type="password" id="defaultLoginFormPassword" name=_password class="form-control mb-4" placeholder="Password">
+          <div class="d-flex justify-content-around">
+              <div>
+              <!-- Remember me -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                    <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                </div>
+             </div>
+             <div>
+                <!-- Forgot password -->
+                <a href="">Forgot password?</a>
+            </div>
+        </div>
+    <!-- Sign in button -->
+    <button class="btn btn-block my-4" style="background-color: #0BB48B;" type="submit">LogIn</button>
+    <!-- Register -->
+    <p>Not a member?
+        <a href="{% url 'registerUser' %}">Register</a>
+    </p>
+    </form>
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base/base_template.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container tables text-center">
+<h2>My Bookings</h2>
+<table class="table table-striped">
+  <thead>
+    <td>ID</td>
+    <td>LORRY NUMBER</td>
+    <td>FROM</td>
+    <td>TO</td>
+    <td>DATE</td>
+    <td>TIME</td>
+    <td>STATE</td>
+    <td>PRICE</td>
+  </thead>
+
+  {% for row in book_history %}
+  <tr>
+        <td>{{row.id }}</td>
+        <td>{{row.lorryid}}</td>
+        <td>{{row.from_place}}</td>
+        <td>{{row.to_place}}</td>
+        <td>{{row.startdate}}</td>
+        <td>{{row.starttime}}</td>
+        <td>{{row.state}}</td>
+        <td>{{row.estimated_amount}}</td>
+        {% if row.state != "CANCELLED" %}
+        <td>
+          <form action="{% url 'my_cancel' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="_id" value={{row.id }} hidden=False>
+            <input type="submit" name="" value="CANCEL">
+          </form>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

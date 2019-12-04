@@ -1,0 +1,108 @@
+
+
+
+ .header{
+     background-color: #0BB48B;
+     color: white;
+     padding: 100px 25px;
+     margin-top: 10px;
+     padding-top: 20px;
+     padding-bottom: 20px;
+ }
+
+ .btn-outline-secondary{
+     background-color: white;
+ }
+ .header-col{
+     background-color: white;
+ }
+
+ .bg-color{
+     background-color: #f6f6f6;
+ }
+
+ .fluid-wrapper {
+   padding: 50px 20px;
+ }
+
+ .r1c3{
+     padding-top: 60px;
+ }
+
+ .r2c1{
+     padding-top: 60px;
+ }
+
+ .fa{
+     color: #0BB48B;
+ }
+
+ .carousel-inner{
+     padding: 30px 5px;
+ }
+
+ .carousel-bg-color{
+     background-color: #0BB48B;
+ }
+
+ .tail{
+     background-color: grey;
+     color: white;
+     padding: 100px 25px;
+ }
+
+ * {
+   box-sizing: border-box;
+ }
+
+
+ .btn-success{
+     background-color: #0BB48B;
+ }
+ /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+ @media screen and (max-width: 600px) {
+   .column, input[type=submit] {
+     width: 100%;
+     margin-top: 0;
+   }
+ }
+
+
+ .margin{
+     padding-top: 30px;
+ }
+
+ .asteriskField {
+     display: none;
+ }
+
+
+ .dropdown:hover .dropdown-menu {
+     display: block;
+     margin-top: 0; // remove the gap so it doesn't close
+  }
+
+ #option_row1{
+   padding-left: 20px;
+   padding-top: 20px;
+   padding-right: 20px;
+   padding-bottom: 20px;
+ }
+
+ #option_row2{
+     padding-left: 20px;
+     padding-top: 20px;
+     padding-right: 20px;
+     padding-bottom: 20px;
+ }
+
+ #option_row3{
+     padding-left: 20px;
+     padding-top: 20px;
+     padding-right: 20px;
+     padding-bottom: 20px;
+ }
+
+ .tables{
+     padding-top: 20px;
+ }

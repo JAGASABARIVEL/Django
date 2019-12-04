@@ -1,0 +1,29 @@
+{% extends "base/base_template.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container margin">
+    <form method="post" class="margin">
+      {% csrf_token %}
+      <div class="row">
+          <div class="col-3"></div>
+          <div class="col">
+            {%if already_registered %}
+                <h1>You are already have an registered account!</h1>
+            {% else %}
+                {% if registered %}
+                    <h1>Thank You for registering!</h1>
+                {% else %}
+                    {{ user_form.username | as_crispy_field }}
+                    {{ profile_form | crispy }}
+            <input type="submit" name="_submit" value="Submit">
+          </div>
+          <div class="col-3"></div>
+      </div>
+  </form>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

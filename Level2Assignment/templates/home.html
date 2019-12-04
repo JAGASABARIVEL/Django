@@ -1,0 +1,252 @@
+{% extends "base/base_template.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+
+  {% if messages %}
+      {% for message in messages %}
+          {% if message.tags %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          <strong>Well done!</strong> {{ message }}.
+          </div>
+          <script type="text/javascript">
+            $(".alert").delay(2000).slideUp(200, function() {
+                $(this).alert('close');
+            });
+          </script>
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col-8">
+        <div class="jumbotron header text-center">
+          <h2 class="display-4">We Offer Flat 50% Sale this January!</h2>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+    <div class="container fluid-wrapper fluid-wrapper">
+      <div class="row">
+        <div class="col-8">
+          <h3 class="display-4">ABOUT US</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-2"></div>
+
+        <div class="col r1c3">
+          <span class="fa fa-signal fa-5x" aria-hidden="true"></span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container fluid-wrapper bg-color">
+      <div class="row">
+        <div class="col r2c1">
+          <span class="fa fa-truck fa-5x" aria-hidden="true"></span>
+        </div>
+
+        <div class="col-8">
+          <h2 class="display-4">OUR MISSION</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container fluid-wrapper text-center">
+      <h2 class="display-4">OUR SERVICES</h2>
+      <hr>
+      <p>WHAT WE OFFER</p>
+      <hr>
+        <div class="card-deck">
+          <div class="card">
+            <img src="{% static "tata.jpg" %}" alt=""/>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="{% static "tanker.png" %}" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="{% static "mini.png" %}" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <div class="card-deck">
+          <div class="card">
+            <img src="{% static "tata.jpg" %}" alt=""/>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="{% static "tanker.png" %}" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="{% static "mini.png" %}" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Description of the service can go here.</p>
+            </div>
+          </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="container text-center">
+      <h2 class="display-4">OUR WORK</h2>
+      <hr>
+      <p>WHAT OUR CUSTOMERS SAYS</p>
+      <div class="fluid-wrapper text-center carousel-bg-color">
+
+      <div id="demo" class="carousel slide" data-ride="carousel">
+
+      <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+       <!-- The slideshow -->
+       <div class="carousel-inner">
+         <div class="carousel-item active">
+           <div class="row">
+             <div class="col-4">
+               <div class="card-deck">
+                 <div class="card">
+                   <img src="" alt="Shwetha">
+                   <div class="card-body">
+                     <h5 class="card-title">Name of the person.</h5>
+                     <p class="card-text">Description of the person.</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="col-8">
+               <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+             </div>
+           </div>
+         </div>
+         <div class="carousel-item">
+           <div class="row">
+             <div class="col-4">
+               <div class="card-deck">
+                 <div class="card">
+                   <img src="" alt="Shwetha">
+                   <div class="card-body">
+                     <h5 class="card-title">Name of the person.</h5>
+                     <p class="card-text">Description of the person.</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="col-8">
+               <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+             </div>
+           </div>
+         </div>
+         <div class="carousel-item">
+           <div class="row">
+             <div class="col-4">
+               <div class="card-deck">
+                 <div class="card">
+                   <img src="" alt="Shwetha">
+                   <div class="card-body">
+                     <h5 class="card-title">Name of the person.</h5>
+                     <p class="card-text">Description of the person.</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="col-8">
+               <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+             </div>
+           </div>
+         </div>
+       </div>
+
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+  <div class="container fluid-wrapper">
+  <h2 class="text-center display-4">CONTACT US</h2>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="fa fa-map-marker"></span> Chicago, US</p>
+      <p><span class="fa fa-phone"></span> +00 1515151515</p>
+      <p><span class="fa fa-envelope"></span> myemail@something.com</p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-success" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
