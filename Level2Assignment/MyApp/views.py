@@ -127,7 +127,6 @@ def create_staging(request):
     form = CreateStagingForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
-            if UserType == 'LO':
                 instance = form.save(commit=False)
                 instance.staginguser = request.user
                 instance.lorryid = form.cleaned_data["lorryid"]
@@ -140,8 +139,6 @@ def create_staging(request):
                 instance.save()
                 messages.success(request, "Staging of the lorry %s has been successfull." % (instance.lorryid))
                 return HttpResponseRedirect(reverse('home'))
-            else:
-                return render(request, "register_lorry_error.html", {})
     return render(request, "common_form_display.html", {"form" : form, "content_output" : global_sync["content_output"]})
 
 @login_required
