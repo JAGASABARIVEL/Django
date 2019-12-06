@@ -60,7 +60,7 @@ class CreateStagingForm(forms.ModelForm):
 class RegisterDriverForm(forms.ModelForm):
     class Meta:
         model = RegisterDriver
-        fields = ('name', 'phone_number', 'address')
+        fields = ('name', 'phone_number', 'address', 'referedby')
         forms.Form.helper = FormHelper()
 
 class SearchLorryForm(forms.ModelForm):
@@ -102,7 +102,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('password', 'confirm_password', 'phone', 'confirm_phone', 'user_type', 'user_blog', 'user_image')
+        fields = ('password', 'confirm_password', 'phone', 'confirm_phone', 'user_blog', 'user_image')
         forms.Form.helper = FormHelper()
 
     def clean(self):

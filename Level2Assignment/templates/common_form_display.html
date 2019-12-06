@@ -2,6 +2,23 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        <strong>Well done!</strong> {{ message }}.
+        </div>
+        <script type="text/javascript">
+          $(".alert").delay(2000).slideUp(200, function() {
+              $(this).alert('close');
+          });
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 <div class="container margin">
     <form method="post" class="margin">
       {% csrf_token %}

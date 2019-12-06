@@ -27,7 +27,10 @@ class VehicleType(models.Model):
 
 class UserProfile(models.Model):
     LORRYOWNER = 'LO'
-    DRIVER = 'D'
+    DRIVER = 'DA'
+    APPLICATION_OWNER = 'AO'
+    MANAGER = 'MA'
+    NORMALUSER = 'NU'
     USER_TYPE = ((LORRYOWNER, 'LORRYOWNER'),
                        (DRIVER, 'DRIVER'),)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -37,7 +40,7 @@ class UserProfile(models.Model):
     confirm_password = models.CharField(max_length=260, blank=True)
     phone = models.IntegerField(blank=True)
     confirm_phone = models.IntegerField(blank=True)
-    user_type = models.CharField(choices=USER_TYPE, default=LORRYOWNER, max_length=2)
+    user_type = models.CharField(choices=USER_TYPE, default=NORMALUSER, max_length=2)
     user_blog = models.URLField(blank=True)
     user_image = models.ImageField(upload_to="user_image", blank=True)
     def __str__(self):
@@ -55,6 +58,7 @@ class RegisterDriver(models.Model):
     name = models.CharField(max_length=260, primary_key=True)
     phone_number = models.IntegerField()
     address = models.CharField(max_length=260)
+    referedby = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
