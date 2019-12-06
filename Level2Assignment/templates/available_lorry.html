@@ -1,8 +1,8 @@
 {% extends "base/base_template.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="container tables text-center">
-<h2>Available Lorrys</h2>
+<div class="container text-center">
+<h2 style="background-color: #0BB48B; color:white;">AVAILABLE LORRYS</h2>
 <table class="table table-striped">
   <thead>
     <td>ID</td>
@@ -28,7 +28,7 @@
           <form action="{% url 'create_user_booking' %}" method="post">
             {% csrf_token %}
             <input type="text" name="_id" value={{row.id }} hidden=False>
-            <input type="submit" name="" value="BOOK">
+            <input type="submit" name="" value="BOOK" style="background-color: #0BB48B; border-radius: 20%; color: white;">
           </form>
         </td>
     </tr>

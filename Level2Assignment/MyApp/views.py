@@ -65,7 +65,8 @@ def register_lorry(request):
                 instance.lorry_number = form.cleaned_data['lorry_number']
                 instance.year_model = form.cleaned_data['year_model']
                 instance.save()
-                return HttpResponseRedirect(reverse('search_lorry'))
+                messages.success(request, "Your lorry has been registered successfully!")
+                return HttpResponseRedirect(reverse('home'))
             else:
                 return render(request, "register_lorry_error.html", {})
     return render(request, "common_form_display.html", {"form" : form, "content_output" : global_sync["content_output"]})
@@ -137,6 +138,8 @@ def create_staging(request):
                 instance.to_place = form.cleaned_data["to_place"]
                 instance.estimated_amount = form.cleaned_data["estimated_amount"]
                 instance.save()
+                messages.success(request, "Staging of the lorry %s has been successfull." % (instance.lorryid))
+                return HttpResponseRedirect(reverse('home'))
             else:
                 return render(request, "register_lorry_error.html", {})
     return render(request, "common_form_display.html", {"form" : form, "content_output" : global_sync["content_output"]})
@@ -198,6 +201,7 @@ def create_user_booking(request):
             lorry.bookinguser = request.user
             lorry.state = "BOOKED"
             lorry.save()
+            messages.success(request, "Booking has been successfull.")
             return HttpResponseRedirect(reverse('my_book'))
         else:
             messages.success(request, "Lorry %s has been already been booked. Please try to book anyother lorry." % (lorry.lorryid))
@@ -206,6 +210,7 @@ def create_user_booking(request):
 
 @login_required
 def complete_booking_option(request):
+    global complete_booking_lorry_id
     global_sync = {"content_output":""}
     UserId = request.user.id
     UserType = (UserProfile.objects.values('user_type').filter(user=UserId))[0]['user_type']
@@ -222,14 +227,15 @@ def complete_booking_option(request):
     if UserType == "NU":
         messages.success(request, "You are not an authorized user.")
         return HttpResponseRedirect(reverse('home'))
-    book_history = Booking.objects.filter(bookinguser=request.user)
-    return render(request, "booking_complete.html", locals())
+    book_history = Booking.objects.filter(state="BOOKED")
+    return render(request, "booking_complete.html", {"book_history":book_history, "content_output" : global_sync["content_output"]})
 
 @login_required
 def complete_booking_form(request):
     global_sync = {"content_output":""}
     UserId = request.user.id
     UserType = (UserProfile.objects.values('user_type').filter(user=UserId))[0]['user_type']
+    lorry = ''
     if UserType == 'LO':
         global_sync = {"content_output":"O"}
     elif UserType == 'MA':
@@ -245,41 +251,25 @@ def complete_booking_form(request):
         return HttpResponseRedirect(reverse('home'))
     if request.method == 'POST':
         complete_booking_lorry_id = request.POST.get('_id')
-        return complete_booking_form_process(request, complete_booking_lorry_id)
+        book_history = Booking.objects.get(id=complete_booking_lorry_id)
+        return render(request, "booking_complete_save.html", {"book_history":book_history, "content_output" : global_sync["content_output"]})
     return render(request, "home.html", {"content_output" : global_sync["content_output"]})
 
 @login_required
-def complete_booking_form_process(request, complete_booking_lorry_id):
-    global_sync = {"content_output":""}
-    UserId = request.user.id
-    UserType = (UserProfile.objects.values('user_type').filter(user=UserId))[0]['user_type']
-    if UserType == 'LO':
-        global_sync = {"content_output":"O"}
-    elif UserType == 'MA':
-        global_sync = {"content_output":"M"}
-    elif UserType == 'AO':
-        global_sync = {"content_output":"A"}
-    elif UserType == 'NU':
-        global_sync = {"content_output":"U"}
-    else:
-        global_sync = {"content_output":""}
-    if UserType == "NU":
-        messages.success(request, "You are not an authorized user.")
+def complete_booking_form_process(request):
+    if request.method == "POST":
+        id = request.POST.get('id')
+        lorry = Booking.objects.get(id=id)
+        lorry.endkm = 0 if request.POST.get("endkm") == "None" else request.POST.get("endkm")
+        lorry.amount = 0 if request.POST.get("amount") == "None" else request.POST.get("amount")
+        lorry.dieselcost = 0 if request.POST.get("dieselcost") == "None" else request.POST.get("dieselcost")
+        lorry.tollcost = 0 if request.POST.get("tollcost") == "None" else request.POST.get("tollcost")
+        lorry.policecost = 0 if request.POST.get("policecost") == "None" else request.POST.get("policecost")
+        lorry.othercost = 0 if request.POST.get("othercost") == "None" else request.POST.get("othercost")
+        lorry.state = "COMPLETED"
+        lorry.save()
+        messages.success(request, "Booking has been completed successfully.")
         return HttpResponseRedirect(reverse('home'))
-    form = CompleteBookingForm(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            instance = form.save(commit=False)
-            lorry = Booking.objects.get(id=complete_booking_lorry_id)
-            lorry.driverid = form.cleaned_data["driverid"]
-            lorry.endkm = form.cleaned_data["endkm"]
-            lorry.amount = form.cleaned_data["amount"]
-            lorry.dieselcost = form.cleaned_data["dieselcost"]
-            lorry.tollcost = form.cleaned_data["tollcost"]
-            lorry.policecost = form.cleaned_data["policecost"]
-            lorry.othercost = form.cleaned_data["othercost"]
-            lorry.save()
-            return render(request, "home.html", {"content_output" : global_sync["content_output"]})
     return render(request, "common_form_display.html", {"form" : form, "content_output" : global_sync["content_output"]})
 
 @login_required
@@ -330,8 +320,8 @@ def my_bookings(request):
     else:
         global_sync = {"content_output":""}
     if UserType != "NU":
-        book_history = Booking.objects.filter(bookinguser=request.user)
-        return render(request, "booking_history.html", locals())
+        book_history = Booking.objects.filter(state="BOOKED")
+        return render(request, "booking_history.html", {"book_history": book_history, "content_output" : global_sync["content_output"]})
     else:
         messages.success(request, "You are not an authorized user.")
         return HttpResponseRedirect(reverse('home'))

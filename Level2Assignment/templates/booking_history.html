@@ -1,8 +1,26 @@
 {% extends "base/base_template.html" %}
 {% load staticfiles %}
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        <strong>Well done!</strong> {{ message }}.
+        </div>
+        <script type="text/javascript">
+          $(".alert").delay(2000).slideUp(200, function() {
+              $(this).alert('close');
+          });
+        </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 <div class="container tables text-center">
-<h2>My Bookings</h2>
+<h2 style="background-color: #0BB48B; color:white;">BOOKINGS</h2>
 <table class="table table-striped">
   <thead>
     <td>ID</td>
@@ -25,12 +43,12 @@
         <td>{{row.starttime}}</td>
         <td>{{row.state}}</td>
         <td>{{row.estimated_amount}}</td>
-        {% if row.state != "CANCELLED" %}
+        {% if row.state != "CANCELLED" and  row.state != "COMPLETED" %}
         <td>
           <form action="{% url 'my_cancel' %}" method="post">
             {% csrf_token %}
             <input type="text" name="_id" value={{row.id }} hidden=False>
-            <input type="submit" name="" value="CANCEL">
+            <input type="submit" name="" value="CANCEL" style="background-color: #0BB48B; border-radius: 20%; color: white;">
           </form>
         </td>
         {% endif %}

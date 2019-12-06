@@ -1,8 +1,8 @@
 {% extends "base/base_template.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="container tables text-center">
-<h2>My Bookings</h2>
+<div class="container text-center">
+<h2 style="background-color: #0BB48B; color:white;">COMPLETE BOOKINGS</h2>
 <table class="table table-striped">
   <thead>
     <td>ID</td>
@@ -30,7 +30,7 @@
           <form action="{% url 'my_complete' %}" method="post">
             {% csrf_token %}
             <input type="text" name="_id" value={{row.id }} hidden=False>
-            <input type="submit" name="" value="COMPLETE">
+            <input type="submit" name="booking_complete" value="COMPLETE" style="background-color: #0BB48B; border-radius: 20%; color: white;">
           </form>
         </td>
         {% endif %}

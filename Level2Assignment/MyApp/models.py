@@ -32,7 +32,10 @@ class UserProfile(models.Model):
     MANAGER = 'MA'
     NORMALUSER = 'NU'
     USER_TYPE = ((LORRYOWNER, 'LORRYOWNER'),
-                       (DRIVER, 'DRIVER'),)
+                       (DRIVER, 'DRIVER'),
+                       (APPLICATION_OWNER, 'APPLICATION_OWNER'),
+                       (MANAGER, 'MANAGER'),
+                       (NORMALUSER, 'NORMALUSER'))
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=260, blank=True)
     last_name = models.CharField(max_length=260, blank=True)

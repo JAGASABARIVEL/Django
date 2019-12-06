@@ -60,7 +60,7 @@ class CreateStagingForm(forms.ModelForm):
 class RegisterDriverForm(forms.ModelForm):
     class Meta:
         model = RegisterDriver
-        fields = ('name', 'phone_number', 'address', 'referedby')
+        fields = ('name', 'phone_number', 'address')
         forms.Form.helper = FormHelper()
 
 class SearchLorryForm(forms.ModelForm):
