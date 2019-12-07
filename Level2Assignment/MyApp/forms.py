@@ -10,7 +10,10 @@ from crispy_forms.bootstrap import PrependedText
 ##################################
 # FOR SHOWCASING MODELS IN FORMS #
 ##################################
-from MyApp.models import RegisterLorry, Booking, SearchLorry, RegisterDriver
+from MyApp.models import (RegisterLorry, Booking,
+                         SearchLorry, RegisterDriver,
+                         RegisterClient, Places,
+                         VehicleType, LoadType,)
 
 ###############################################
 # FOR BOOTSTRAP'S DATE AND TIME PICKER WIDGET #
@@ -30,12 +33,11 @@ class TimeInput(forms.TimeInput):
     input_type = 'time'
 
 class ReportSearchForm(forms.Form):
-    lorryid = forms.IntegerField()
+    lorryid = forms.CharField(max_length=262)
     from_date = forms.DateField(widget=DatePickerInput(attrs={'class': 'datepicker'}))
     fromtime = forms.TimeField(widget=TimePickerInput())
     todate = forms.DateField(widget=DatePickerInput(attrs={'class': 'datepicker'}))
     totime = forms.TimeField(widget=TimePickerInput())
-
     def __init__(self, *args, **kwargs):
         super(ReportSearchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -44,6 +46,24 @@ class RegisterLorryForm(forms.ModelForm):
     class Meta:
         model=RegisterLorry
         exclude = ['user']
+        forms.Form.helper = FormHelper()
+
+class PlacesForm(forms.ModelForm):
+    class Meta:
+        model = Places
+        exclude = ['']
+        forms.Form.helper = FormHelper()
+
+class VehicleTypeForm(forms.ModelForm):
+    class Meta:
+        model = VehicleType
+        exclude = ['']
+        forms.Form.helper = FormHelper()
+
+class LoadTypeForm(forms.ModelForm):
+    class Meta:
+        model = LoadType
+        exclude = ['']
         forms.Form.helper = FormHelper()
 
 class CreateStagingForm(forms.ModelForm):
@@ -63,6 +83,12 @@ class RegisterDriverForm(forms.ModelForm):
         fields = ('name', 'phone_number', 'address')
         forms.Form.helper = FormHelper()
 
+class RegisterClientForm(forms.ModelForm):
+    class Meta:
+        model = RegisterClient
+        fields = ('name', 'phone_number', 'address')
+        forms.Form.helper = FormHelper()
+
 class SearchLorryForm(forms.ModelForm):
     class Meta:
         model = SearchLorry
@@ -75,7 +101,7 @@ class SearchLorryForm(forms.ModelForm):
 class CreateBookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ('lorryid', 'driverid', 'bookingdate', 'amount')
+        fields = ('driverid', 'client_name', 'load_type',)
         widgets = {
             'tripdate': DatePickerInput(attrs={'class': 'datepicker'})
         }

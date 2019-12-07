@@ -25,6 +25,11 @@ class VehicleType(models.Model):
     def __str__(self):
         return str(self.vehicletype)
 
+class LoadType(models.Model):
+    loadtype = models.CharField(max_length=264, unique=True)
+    def __str__(self):
+        return str(self.loadtype)
+
 class UserProfile(models.Model):
     LORRYOWNER = 'LO'
     DRIVER = 'DA'
@@ -65,11 +70,23 @@ class RegisterDriver(models.Model):
     def __str__(self):
         return self.name
 
+class RegisterClient(models.Model):
+    name = models.CharField(max_length=260, primary_key=True)
+    phone_number = models.IntegerField()
+    address = models.CharField(max_length=260)
+    referedby = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
 class Booking(models.Model):
     lorryid = models.ForeignKey(RegisterLorry, on_delete=models.CASCADE)
     driverid = models.ForeignKey(RegisterDriver, on_delete=models.CASCADE)
     staginguser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='staging_user', blank=True, null=True)
     bookinguser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='booking_user', blank=True, null=True)
+    cancelledby = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cancelled_user', blank=True, null=True)
+    completedby = models.ForeignKey(User, on_delete=models.CASCADE, related_name='completed_user', blank=True, null=True)
+    client_name = models.ForeignKey(RegisterClient, on_delete=models.CASCADE,  blank=True, null=True)
+    load_type = models.ForeignKey(LoadType, on_delete=models.CASCADE,  blank=True, null=True)
     bookingdate = models.DateTimeField(default=datetime.now)
     startdate = models.DateField()
     starttime = models.TimeField()

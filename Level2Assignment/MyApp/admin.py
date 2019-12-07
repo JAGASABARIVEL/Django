@@ -2,7 +2,7 @@ from django.contrib import admin
 from MyApp.models import (VehicleType, RegisterLorry,
                           Booking, UserProfile,
                           Places, BookState,
-                          SearchLorry)
+                          SearchLorry, RegisterClient,)
 # Register your models here.
 admin.site.register(VehicleType)
 admin.site.register(RegisterLorry)

@@ -41,12 +41,24 @@
               </li>
 
               {% if user.is_authenticated and content_output == "M" %}
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ADD
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" onmouseover="mouseOver(0)" onmouseout="mouseOut(0)" href="{% url 'register_places' %}">ADD LOCATION</a>
+                      <a class="dropdown-item" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" href="{% url 'register_vehicle_type' %}">ADD VEHICLE TYPE</a>
+                      <a class="dropdown-item" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" href="{% url 'register_loadtype' %}">ADD LOAD TYPE</a>
+                  </div>
+              </li>
+
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       REGISTRATION
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" onmouseover="mouseOver(0)" onmouseout="mouseOut(0)" href="{% url 'register_driver_view' %}">REGISTER DRIVER</a>
+                          <a class="dropdown-item" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" href="{% url 'register_driver_view' %}">REGISTER DRIVER</a>
+                          <a class="dropdown-item" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" href="{% url 'register_client' %}">REGISTER CLIENT</a>
                       </div>
                   </li>
               <li class="nav-item dropdown">
@@ -54,7 +66,7 @@
                   STAGING
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" href="{% url 'create_staging' %}">STAGE LORRY</a>
+                      <a class="dropdown-item" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" href="{% url 'create_staging' %}">STAGE LORRY</a>
                     </div>
                 </li>
 
@@ -63,9 +75,9 @@
                     BOOKING
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" href="{% url 'search_lorry' %}">CREATE BOOKING</a>
-                        <a class="dropdown-item" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" href="{% url 'my_book' %}">MY BOOKING</a>
-                        <a class="dropdown-item" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" href="{% url 'my_complete_option' %}">COMPLETE BOOKING</a>
+                        <a class="dropdown-item" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" href="{% url 'search_lorry' %}">CREATE BOOKING</a>
+                        <a class="dropdown-item" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" href="{% url 'my_book' %}">MY BOOKING</a>
+                        <a class="dropdown-item" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)" href="{% url 'my_complete_option' %}">COMPLETE BOOKING</a>
                       </div>
                   </li>
 
@@ -74,8 +86,8 @@
                       GENERATE-REPORT
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" href="{% url 'my_sale' %}">QUICK REPORT</a>
-                          <a class="dropdown-item" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" href="{% url 'reportSearch' %}">CUSTOM REPORT</a>
+                          <a class="dropdown-item" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)" href="{% url 'my_sale' %}">QUICK REPORT</a>
+                          <a class="dropdown-item" onmouseover="mouseOver(10)" onmouseout="mouseOut(10)" href="{% url 'reportSearch' %}">CUSTOM REPORT</a>
                         </div>
                     </li>
                 </ul>
@@ -85,7 +97,7 @@
                      <button class="btn btn-secondary dropdown-toggle fas fa-bars style="background:grey ;border-radius:50%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      </button>
                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                         <a class="dropdown-item" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" href="{% url 'user_logout' %}">Logout</a>
+                         <a class="dropdown-item" onmouseover="mouseOver(11)" onmouseout="mouseOut(11)" href="{% url 'user_logout' %}">Logout</a>
                      </div>
                   </div>
                 </form>
@@ -144,66 +156,64 @@
           {% elif user.is_authenticated and content_output == "A" %}
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              REGISTRATION
+              ADD
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" onmouseover="mouseOver(0)" onmouseout="mouseOut(0)" href="{% url 'register_driver_view' %}">REGISTER DRIVER</a>
-              </div>
-          </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          STAGING
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" href="{% url 'create_staging' %}">STAGE LORRY</a>
-            </div>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            BOOKING
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" href="{% url 'search_lorry' %}">CREATE BOOKING</a>
-                <a class="dropdown-item" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" href="{% url 'my_book' %}">MY BOOKING</a>
-                <a class="dropdown-item" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" href="{% url 'my_complete_option' %}">COMPLETE BOOKING</a>
+                  <a class="dropdown-item" onmouseover="mouseOver(0)" onmouseout="mouseOut(0)" href="{% url 'register_places' %}">ADD LOCATION</a>
+                  <a class="dropdown-item" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" href="{% url 'register_vehicle_type' %}">ADD VEHICLE TYPE</a>
+                  <a class="dropdown-item" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" href="{% url 'register_loadtype' %}">ADD LOAD TYPE</a>
               </div>
           </li>
 
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  REGISTRATION
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" href="{% url 'register_driver_view' %}">REGISTER DRIVER</a>
+                      <a class="dropdown-item" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" href="{% url 'register_client' %}">REGISTER CLIENT</a>
+                  </div>
+              </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              GENERATE-REPORT
+              STAGING
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" href="{% url 'my_sale' %}">QUICK REPORT</a>
-                  <a class="dropdown-item" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" href="{% url 'reportSearch' %}">CUSTOM REPORT</a>
+                  <a class="dropdown-item" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" href="{% url 'create_staging' %}">STAGE LORRY</a>
                 </div>
             </li>
-        </ul>
 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                BOOKING
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" onmouseover="mouseOver(6)" onmouseout="mouseOut(6)" href="{% url 'search_lorry' %}">CREATE BOOKING</a>
+                    <a class="dropdown-item" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" href="{% url 'my_book' %}">MY BOOKING</a>
+                    <a class="dropdown-item" onmouseover="mouseOver(8)" onmouseout="mouseOut(8)" href="{% url 'my_complete_option' %}">COMPLETE BOOKING</a>
+                  </div>
+              </li>
 
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: white; font-weight:450;" href="{% url 'option' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  GENERATE-REPORT
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" onmouseover="mouseOver(9)" onmouseout="mouseOut(9)" href="{% url 'my_sale' %}">QUICK REPORT</a>
+                      <a class="dropdown-item" onmouseover="mouseOver(10)" onmouseout="mouseOut(10)" href="{% url 'reportSearch' %}">CUSTOM REPORT</a>
+                    </div>
+                </li>
+            </ul>
 
             <form class="form-inline my-2 my-lg-0">
               <div class="dropdown">
                  <button class="btn btn-secondary dropdown-toggle fas fa-bars style="background:grey ;border-radius:50%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  </button>
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                     <a class="dropdown-item" onmouseover="mouseOver(7)" onmouseout="mouseOut(7)" href="{% url 'user_logout' %}">Logout</a>
+                     <a class="dropdown-item" onmouseover="mouseOver(11)" onmouseout="mouseOut(11)" href="{% url 'user_logout' %}">Logout</a>
                  </div>
               </div>
             </form>
-
-          {% elif user.is_authenticated and content_output == "U" %}
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <div class="dropdown">
-               <button class="btn btn-secondary dropdown-toggle fas fa-bars style="background:grey ;border-radius:50%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               </button>
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                   <a class="dropdown-item" onmouseover="mouseOver(0)" onmouseout="mouseOut(0)" href="{% url 'user_logout' %}">Logout</a>
-               </div>
-            </div>
-          </form>
 
           {% else %}
             </ul>

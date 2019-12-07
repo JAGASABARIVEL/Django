@@ -19,4 +19,9 @@ urlpatterns = [
     path('completeBookings/', views.complete_booking_form, name="my_complete"),
     path('completeBookingsProcess/', views.complete_booking_form_process, name="my_complete_process"),
     path('registerDriver/', views.register_driver_view, name="register_driver_view"),
+    path('registerClient/', views.register_client_view, name="register_client"),
+    path('bookingProcess/', views.my_booking_process_view, name="my_booking_process"),
+    path('registerPlace/', views.register_places_view, name="register_places"),
+    path('registerVehicle/', views.register_vehicle_type_view, name="register_vehicle_type"),
+    path('registerLoadType/', views.register_loadtype_view, name="register_loadtype"),
 ]
