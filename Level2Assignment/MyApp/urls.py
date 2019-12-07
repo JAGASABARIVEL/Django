@@ -4,7 +4,7 @@ from MyApp import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('search/', views.report_search, name="reportSearch"),
-    path('mySales/', views.view_report_owner, name="my_sale"),
+    path('mySales/', views.get_report, name="my_sale"),
     path('registerLorry/', views.register_lorry, name="registerLorry"),
     path('createStaging/', views.create_staging, name="create_staging"),
     path('searchLorry/', views.search_lorry_for_booking, name="search_lorry"),

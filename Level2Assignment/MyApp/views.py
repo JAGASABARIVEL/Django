@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -519,17 +519,18 @@ def report_search(request):
             lorryid = form.cleaned_data["lorryid"]
             from_date = form.cleaned_data["from_date"]
             fromtime = form.cleaned_data["fromtime"]
-            todate = form.cleaned_data["todate"]
+            todate = form.cleaned_data["todate"] + timedelta(days=1)
             totime = form.cleaned_data["totime"]
-            content = {"content":{"lorryid":lorryid, "from_date":from_date,
-                             "fromtime":fromtime, "todate":todate,
-                             "totime":totime}}
+            content = {"filter":{"lorryid":lorryid,
+                                "from_date":from_date,
+                                "todate":todate}}
             return get_report(request, content)
     return render(request, "report_search.html", {"form" : form, "content_output" : global_sync["content_output"]})
 
 
 @login_required
-def get_report(request, contents=False):
+def get_report(request, contents=''):
+    print("contents : ", len(contents))
     global_sync = {"content_output":""}
     UserId = request.user.id
     UserType = (UserProfile.objects.values('user_type').filter(user=UserId))[0]['user_type']
@@ -546,12 +547,34 @@ def get_report(request, contents=False):
     if UserType == "NU":
         messages.success(request, "You are not an authorized user.")
         return HttpResponseRedirect(reverse('home'))
-    lorry_numbers = RegisterLorry.objects.filter(user=request.user).values('lorry_number')
-    shaved_lorry_numbers = []
-    for lo_number in lorry_numbers:
-        shaved_lorry_numbers.append(lo_number["lorry_number"])
-    lorry_history = Booking.objects.filter(lorryid__in=shaved_lorry_numbers)
-    return render(request, "reports.html", locals())
+    if UserType == 'MA' or UserType == 'AO':
+        if len(contents) == 0:
+            lorry_history = Booking.objects.all()
+            return render(request, "reports.html", {'lorry_history':lorry_history, "content_output" : global_sync["content_output"]})
+        else:
+            lorry_id = contents['filter']['lorryid']
+            from_date = contents['filter']['from_date']
+            to_date = contents['filter']['todate']
+            lorry_history = Booking.objects.filter(lorryid=lorry_id, bookingdate__range=[from_date, to_date])
+            return render(request, "reports.html", {"lorry_history":lorry_history, "content_output" : global_sync["content_output"]})
+    elif UserType == 'LO':
+        lorry_numbers = RegisterLorry.objects.filter(user=request.user).values('lorry_number')
+        shaved_lorry_numbers = []
+        for lo_number in lorry_numbers:
+            shaved_lorry_numbers.append(lo_number["lorry_number"])
+        if len(contents) == 0:
+            lorry_history = Booking.objects.filter(lorryid__in=shaved_lorry_numbers)
+            return render(request, "reports.html", {'lorry_history':lorry_history, "content_output" : global_sync["content_output"]})
+        else:
+            lorry_id = contents['filter']['lorryid']
+            from_date = contents['filter']['from_date']
+            to_date = contents['filter']['todate']
+            if lorry_id in shaved_lorry_numbers:
+                lorry_history = Booking.objects.filter(lorryid=lorry_id, bookingdate__range=[from_date, to_date])
+                return render(request, "reports.html", {"lorry_history":lorry_history, "content_output" : global_sync["content_output"]})
+            else:
+                messages.success(request, "You need to be an manager or owner of the lorry to view reports other than your lorry.")
+                return HttpResponseRedirect(reverse('home'))
 
 @login_required
 def view_report_owner(request, contents=False):
